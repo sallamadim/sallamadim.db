@@ -1,0 +1,14 @@
+{
+  "name": "sallamadim.db",
+  "version": "0.0.1",
+  "description": "A database module.",
+  "main": "sallamadim.js",
+  "scripts": {
+    "test": "node sallamadim.js"
+  },
+  "author": "sallamadim",
+  "license": "ISC",
+  "dependencies": {
+    "fs": "^0.0.1-security"
+  }
+}

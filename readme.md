@@ -27,16 +27,28 @@ const db = new Database("./database/database.json")
 const { Database } = require('sallamadim.db')
 const db = new Database("database.json")
 
-//Set & push
+// Set & push & unpush & delete & remove
 db.set(`sallamadim`, "db") // Output: db
-//With object:
+db.delete(`sallamadim`) // Output: true
+
+// With object:
 db.set(`sallamadimObject`, {
     databaseName: "sallamadim.db",
     author: "sallamadım#3675"
 }) // Output: { databaseName: 'sallamadim.db', author: 'sallamadım#3675' }
-db.push(`push`, "push123") // Output: [ 'push123' ]
+db.remove(`sallamadimObject`) // Output: true
 
-//Has & fetch & fetchAll
+db.push(`push`, "push123") // Output: [ 'push123' ]
+db.push(`push`, "push321") // Output: [ 'push123' , 'push321' ]
+db.unpush(`push`, "push123") // Output: [ 'push321' ]
+
+// deleteEach
+db.set(`ok`, "ok123")
+db.set(`okk`, "ok321")
+db.set(`okkk`, "ok432")
+db.deleteEach("ok") // Output: true
+
+// Has & fetch & fetchAll
 db.has(`sallamadim`) // Output: true
 db.has(`sallamadim123`) // Output: false
 db.fetch(`sallamadim`) // Output: db
@@ -49,10 +61,9 @@ Output:
 }
 */
 
-// Subtract & add & delete
+// Subtract & add
 db.add(`number`, 19) // Output: 19
 db.subtract(`number`, 10) // Output: 9
-db.delete(`number`) // Output: true
 
 // Clear database
 db.clearDatabase()
@@ -60,4 +71,8 @@ db.clearDatabase()
 
 ## Changelog
 
-### Soon™️
+### v0.0.2
+- Added **unpush** method.
+- Added **remove** method.
+- Added **deleteEach** method.
+- Fixed bugs.

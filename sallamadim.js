@@ -81,6 +81,18 @@ write(this.file, file)
 this.set(array, [value])
 }
 }
+unpush(data, value) {
+if(!data) throw new Error("sallamadim.db | There is no data to unpush.")
+if(!value) throw new Error("sallamadim.db | There is no value to unpush.")
+let file = load(this.file)
+var arr = []
+if(file[data]) {
+arr = file[data]
+}
+arr = arr.filter((x) => x !== value)
+this.set(data, arr)
+return file[data]
+}
 has(data) {
 if(!data) throw new Error("sallamadim.db | There is no data to check.")
 let file = load(this.file)
@@ -99,6 +111,31 @@ if(!data) throw new Error("sallamadim.db | There is no data to fetch.")
 let file = load(this.file)
 if(!file[data]) file[data] = null
 return file[data]
+}
+get(data) {
+if(!data) throw new Error("sallamadim.db | There is no data to get.")
+let file = load(this.file)
+if(file[data]) file[data] = null
+return file[data]
+}
+deleteEach(data) {
+if(!data) throw new Error("sallamadim.db | There is no data to delete each.")
+let file = load(this.file)
+let item = Object.keys(file)
+if(item === "") throw new Error("sallamadim.db | There is nothing to delete each.")
+item = item.filter((dataa) => dataa.includes(data))
+item.forEach((dataaa) => {
+this.remove(dataaa)
+})
+return;
+}
+remove(data) {
+if(!data) throw new Error("sallamadim.db | There is no data to remove.")
+let file = load(this.file)
+if(!file[data]) throw new Error("sallamadim.db | This data is not exists.")
+file[data] = undefined
+write(this.file, file)
+return;
 }
 }
 module.exports = {Database}
